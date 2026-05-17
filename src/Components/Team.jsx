@@ -43,6 +43,13 @@ const teamMembers = [
         avatar: "/team/elnabawy.jpeg",
         linkedin: "https://www.linkedin.com/in/ahmed-elnabawy-459597218/",
     },
+
+     {
+        name: "Eng. Ahmed Elnghonemy",
+        role: "Senior Graphic Design",
+        avatar: "/team/ghonemy.jpeg",
+        // linkedin: "https://www.linkedin.com/in/ahmed-elnabawy-459597218/",
+    },
 ];
 
 const Team = () => (
