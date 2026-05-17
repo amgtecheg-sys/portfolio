@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+/* Brand color variables */
+:root {
+  --brand-dark: #191246;
+  --brand-dark-2: #1e1654;
+  --brand-dark-3: #150f3d;
+  --brand-card: #1a1550;
+  --brand-green: #3AB54A;
+  --brand-green-light: #4dcf5e;
+  --brand-green-dim: rgba(58, 181, 74, 0.15);
+  --brand-green-glow: rgba(58, 181, 74, 0.08);
+}
+
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-dark);
+  color: #e2e8f0;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(58, 181, 74, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58, 181, 74, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-green-light);
+}
