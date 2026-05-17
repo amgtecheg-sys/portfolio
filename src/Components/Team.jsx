@@ -32,6 +32,12 @@ const teamMembers = [
         linkedin: "https://www.linkedin.com/in/mohamed-gbr-222776278/",
     },
         {
+        name: "Eng. Rawan Nada",
+        role: "UI/UX Designer ",
+        avatar: "/team/Rawan.jpeg",
+        linkedin: "https://www.linkedin.com/in/rawannada/",
+    },
+        {
         name: "Eng. Ahmed Elnabawy",
         role: "Data Entry & data analysis",
         avatar: "/team/elnabawy.jpeg",
