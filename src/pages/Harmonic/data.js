@@ -1,6 +1,6 @@
 export const PROJECT_INFO = {
   titleAr: "برنامج الحاضنة الهندسية لمجموعة هارمونك الهندسية",
-  summaryAr: "يهدف هذا المقترح إلى تطوير برنامج الحاضنة الهندسية لمجموعة هارمونك الهندسية، والذي يشمل أقسامًا للأفراد (تدريب، توظيف، استشارات) وللشركات (تطوير، توظيف، استشارات). سيتم تنفيذ المشروع عبر 4 مراحل تقنية رئيسية، بدءًا من تحليل المتطلبات وتصميم الحلول، مرورًا بالتطوير الشامل للمنصات والتطبيقات، وصولاً إلى الاختبار والنشر والدعم. تشمل المخرجات الرئيسية منصة ويب متكاملة، تطبيقات موبايل (iOS و Android)، وأنظمة إدارة داخلية.",
+  summaryAr: "يهدف هذا المقترح إلى تطوير برنامج الحاضنة الهندسية لمجموعة هارمونك الهندسية، والذي يشمل أقسامًا للأفراد (تدريب، توظيف، استشارات) وللشركات (تطوير، توظيف، استشارات). سيتم تنفيذ المشروع عبر 4 مراحل تقنية رئيسية، بدءًا من تحليل المتطلبات وتصميم الحلول، مرورًا بالتطوير الشامل للمنصات والتطبيقات، وصولاً إلى الاختبار والنشر والدعم. تشمل المخرجات الرئيسية منصة ويب متكاملة، تطبيق ويب تقدمي (PWA)، وأنظمة إدارة داخلية.",
   totalEGP: 310104,
   subtotalEGP: 262800,
   contingencyPercent: 18,
@@ -44,7 +44,7 @@ export const MILESTONES = [
     titleAr: "تطوير الواجهة الأمامية وتطبيقات الموبايل",
     weeksAr: "الأسابيع ~18–27",
     descAr: "بناء الواجهات المرئية للمستخدمين عبر منصة الويب وتطبيقات الموبايل.",
-    deliverablesAr: ["واجهة ويب متجاوبة مربوطة بالـ API", "بناءات iOS/Android (TestFlight/Internal testing)", "تكامل بوابة دفع (بيئة تجريبية)", "تقرير أداء أولي"],
+    deliverablesAr: ["واجهة ويب متجاوبة مربوطة بالـ API", "تطبيق PWA قابل للتثبيت على جميع الأجهزة", "تكامل بوابة دفع (بيئة تجريبية)", "تقرير أداء أولي"],
   },
   {
     titleAr: "الاختبار، النشر، والدعم",
@@ -105,8 +105,7 @@ export const PHASES = [
     ],
     tasks: [
       { code: "P3-T01", priority: "high", titleAr: "تطوير الواجهة الأمامية لمنصة الويب", hours: 120, days: 20, riskAr: "مشاكل التوافق مع المتصفحات المختلفة قد تتطلب جهداً إضافياً." },
-      { code: "P3-T02", priority: "high", titleAr: "تطوير تطبيق الموبايل (iOS)", hours: 90, days: 15, riskAr: "متطلبات App Store قد تسبب تأخيرات في النشر." },
-      { code: "P3-T03", priority: "high", titleAr: "تطوير تطبيق الموبايل (Android)", hours: 90, days: 15, riskAr: "متطلبات Google Play قد تسبب تأخيرات في النشر." },
+      { code: "P3-T02", priority: "high", titleAr: "تطوير تطبيق الويب التقدمي (PWA)", hours: 150, days: 25, riskAr: "ضمان توافق PWA مع متصفحات مختلفة وأجهزة متنوعة قد يتطلب جهداً إضافياً." },
       { code: "P3-T04", priority: "medium", titleAr: "تكامل مع أنظمة الدفع (Payment Gateway)", hours: 30, days: 5, riskAr: "مشاكل في وثائق API بوابة الدفع قد تؤخر التكامل." },
       { code: "P3-T05", priority: "medium", titleAr: "تحسين الأداء وقابلية التوسع", hours: 24, days: 4, riskAr: "مشاكل الأداء قد تظهر مع زيادة عدد المستخدمين." },
     ],
@@ -136,13 +135,12 @@ export const FINANCIAL_LINES = [
   { code: "P1-T1-T4", category: "تصميم", titleAr: "تحليل المتطلبات وتصميم UI/UX", qty: 25, unit: "يوم", unitPrice: 450, total: 11250 },
   { code: "P2-T1-T5", category: "تطوير", titleAr: "تطوير الواجهة الخلفية و API ولوحة التحكم", qty: 51, unit: "يوم", unitPrice: 1350, total: 68850 },
   { code: "P3-T1", category: "تطوير", titleAr: "تطوير الواجهة الأمامية لمنصة الويب", qty: 20, unit: "يوم", unitPrice: 1350, total: 27000 },
-  { code: "P3-T2-T3", category: "تطوير", titleAr: "تطوير تطبيقات الموبايل (iOS & Android)", qty: 30, unit: "يوم", unitPrice: 1350, total: 40500 },
+  { code: "P3-T2", category: "تطوير", titleAr: "تطوير تطبيق الويب التقدمي (PWA)", qty: 25, unit: "يوم", unitPrice: 1350, total: 33750 },
   { code: "P3-T4-T5", category: "تطوير", titleAr: "تكامل الدفع وتحسين الأداء", qty: 9, unit: "يوم", unitPrice: 1350, total: 12150 },
   { code: "P4-T1-T2", category: "جودة", titleAr: "اختبار الجودة وقبول المستخدم", qty: 15, unit: "يوم", unitPrice: 900, total: 13500 },
   { code: "P4-T3", category: "بنية تحتية", titleAr: "نشر النظام على بيئة الإنتاج", qty: 6, unit: "يوم", unitPrice: 900, total: 5400 },
   { code: "P4-T4-T5", category: "دعم", titleAr: "تدريب، وثائق، ودعم أولي", qty: 9, unit: "يوم", unitPrice: 900, total: 8100 },
-  { code: "PM-001", category: "إدارة", titleAr: "إدارة المشروع", qty: 25, unit: "أسبوع", unitPrice: 2250, total: 56250 },
-  { code: "LIC-001", category: "ترخيص", titleAr: "ترخيص تطوير تطبيق موبايل (iOS & Android)", qty: 1, unit: "رسم ثابت", unitPrice: 9000, total: 9000 },
+  { code: "PM-001", category: "إدارة", titleAr: "إدارة المشروع", qty: 32, unit: "أسبوع", unitPrice: 2250, total: 72000 },
   { code: "INF-001", category: "بنية تحتية", titleAr: "استضافة سحابية (تقديري لمدة 6 أشهر)", qty: 6, unit: "شهر", unitPrice: 1800, total: 10800 },
 ];
 
@@ -150,7 +148,7 @@ export const PAYMENT_MILESTONES = [
   { milestoneAr: "عند توقيع العقد وبدء المشروع", percent: 25, amount: 77526, timingAr: "عند توقيع العقد" },
   { milestoneAr: "بعد اكتمال مرحلة التصميم و UI/UX", percent: 25, amount: 77526, timingAr: "عند اعتماد تصميمات UI/UX" },
   { milestoneAr: "بعد اكتمال تطوير الواجهة الخلفية و API", percent: 25, amount: 77526, timingAr: "عند تسليم API جاهز للاختبار" },
-  { milestoneAr: "بعد اكتمال تطوير الواجهة الأمامية وتطبيقات الموبايل", percent: 20, amount: 62021, timingAr: "عند تسليم الواجهات للاختبار" },
+  { milestoneAr: "بعد اكتمال تطوير الواجهة الأمامية و PWA", percent: 20, amount: 62021, timingAr: "عند تسليم الواجهات للاختبار" },
   { milestoneAr: "بعد النشر النهائي والتدريب", percent: 5, amount: 15505, timingAr: "عند النشر النهائي وتقديم التدريب" },
 ];
 
