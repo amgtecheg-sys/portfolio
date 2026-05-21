@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TAG_STYLES } from "../constants/projects";
+import SkeletonImage from "./SkeletonImage";
 
 const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
   const [activeImg, setActiveImg] = useState(0);
@@ -18,19 +19,24 @@ const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
       <div className="flex flex-col lg:flex-row">
 
         {/* Left — image preview */}
-        <div className="relative lg:w-[58%] overflow-hidden bg-black/20">
+        <div className="relative lg:w-[58%] h-64 lg:h-auto overflow-hidden bg-black/20">
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={activeImg}
-              src={project.images[activeImg]}
-              alt={`${project.name} screenshot ${activeImg + 1}`}
-              className="w-full h-64 lg:h-full object-cover object-top"
+              className="w-full h-full"
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.4 }}
-              loading="lazy"
-            />
+            >
+              <SkeletonImage
+                src={project.images[activeImg]}
+                alt={`${project.name} screenshot ${activeImg + 1}`}
+                className="w-full h-full object-cover object-top"
+                skeletonClassName="h-full"
+                loading="lazy"
+              />
+            </motion.div>
           </AnimatePresence>
 
           {/* Gradient overlays */}
@@ -39,7 +45,7 @@ const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
 
           {/* Tag badge */}
           <div
-            className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider"
+            className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider z-10"
             style={{ color: tag.color, background: tag.bg, border: `1px solid ${tag.border}`, backdropFilter: "blur(8px)" }}
           >
             {project.tag}
@@ -47,7 +53,7 @@ const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
 
           {/* Thumbnail switcher */}
           {project.images.length > 1 && (
-            <div className="absolute bottom-3 left-3 flex gap-2">
+            <div className="absolute bottom-3 left-3 flex gap-2 z-10">
               {project.images.map((img, i) => (
                 <button
                   key={i}
