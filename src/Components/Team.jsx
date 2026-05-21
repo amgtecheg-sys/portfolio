@@ -6,7 +6,6 @@ import TeamCard from "./TeamCard";
 
 const Team = () => (
   <section id="team" className="py-28 px-6 bg-brand-dark-3 relative overflow-hidden">
-
     {/* Background blobs */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-[120px]" />
@@ -14,15 +13,8 @@ const Team = () => (
     </div>
 
     <div className="max-w-6xl mx-auto relative z-10">
-
       {/* Header */}
-      <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7 }}
-      >
+      <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}>
         <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-green/10 border border-brand-green/25 text-brand-green text-xs font-semibold rounded-full uppercase tracking-widest mb-5">
           <Users className="h-3.5 w-3.5" /> Our Team
         </span>
@@ -36,19 +28,11 @@ const Team = () => (
           </span>{" "}
           Behind AMG
         </h2>
-        <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
-          The passionate people who turn bold ideas into real products.
-        </p>
+        <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">The passionate people who turn bold ideas into real products.</p>
       </motion.div>
 
       {/* Cards */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
-        variants={CONTAINER_VARIANTS}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-      >
+      <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7" variants={CONTAINER_VARIANTS} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>
         {TEAM_MEMBERS.map((member) => (
           <TeamCard key={member.name} member={member} />
         ))}

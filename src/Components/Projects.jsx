@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CATEGORIES } from "../constants/projects";
 import ProjectCard from "./ProjectCard";
+import WideProjectCard from "./WideProjectCard";
 import EmptyState from "./EmptyState";
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState("mobile");
   const active = CATEGORIES.find((c) => c.id === activeTab);
+  const isWideLayout = active.projects.some((p) => p.wide);
 
   return (
     <section className="py-24 bg-brand-dark" id="projects">
@@ -81,11 +83,19 @@ const Projects = () => {
         <AnimatePresence mode="wait">
           <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
             {active.projects.length > 0 ? (
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
-                {active.projects.map((project, i) => (
-                  <ProjectCard key={project.id} project={project} index={i} />
-                ))}
-              </div>
+              isWideLayout ? (
+                <div className="flex flex-col gap-6">
+                  {active.projects.map((project, i) => (
+                    <WideProjectCard key={project.id} project={project} index={i} categoryColor={active.color} CategoryIcon={active.icon} />
+                  ))}
+                </div>
+              ) : (
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+                  {active.projects.map((project, i) => (
+                    <ProjectCard key={project.id} project={project} index={i} />
+                  ))}
+                </div>
+              )
             ) : (
               <EmptyState label={active.label} color={active.color} />
             )}
