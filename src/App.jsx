@@ -1,17 +1,16 @@
-import "./App.css";
-import Aboutme from "./Components/Aboutme";
-import ScrollToTop from "./Components/buttonScroll";
+import Navbar from "./Components/Header";
+import Hero from "./Components/Hero";
+import AboutMe from "./Components/AboutMe";
 import Contact from "./Components/Contact";
 import Footer from "./Components/footer";
-import Header from "./Components/Header";
-import Navbar from "./Components/Navbar";
+import ScrollToTop from "./Components/buttonScroll";
 
 function App() {
   return (
     <>
-      <Header />
       <Navbar />
-      <Aboutme />
+      <Hero />
+      <AboutMe />
       <Contact />
       <ScrollToTop />
       <Footer />
