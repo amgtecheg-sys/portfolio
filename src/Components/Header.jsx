@@ -20,32 +20,30 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
-        <a href="#home" className="select-none flex items-center gap-2">
+        <Link to="/" className="select-none flex items-center gap-2">
           <Logo className="h-14 w-auto" />
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((link) =>
-            link.to ? (
-              <Link key={link.to} to={link.to} className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium">
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href} className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium">
-                {link.label}
-              </a>
-            )
-          )}
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.to ?? link.href}
+              to={link.to ?? link.href}
+              className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         {/* CTA button desktop */}
-        <a
-          href="#contact"
+        <Link
+          to="/#contact"
           className="hidden md:inline-flex items-center gap-2 px-5 py-2 bg-brand-green text-white text-sm font-semibold rounded-xl hover:bg-brand-green-light transition-all duration-200 shadow-lg shadow-brand-green/20"
         >
           Get in Touch
-        </a>
+        </Link>
 
         {/* Mobile burger */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-gray-300 hover:text-brand-green transition-colors p-2 rounded-lg hover:bg-brand-green/5">
@@ -56,34 +54,24 @@ const Navbar = () => {
       {/* Mobile menu */}
       {isOpen && (
         <nav className="md:hidden bg-brand-dark/98 backdrop-blur-xl border-t border-brand-green/10 px-6 py-4 flex flex-col gap-1">
-          {NAV_LINKS.map((link) =>
-            link.to ? (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsOpen(false)}
-                className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
-              >
-                {link.label}
-              </a>
-            )
-          )}
-          <a
-            href="#contact"
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.to ?? link.href}
+              to={link.to ?? link.href}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            to="/#contact"
             onClick={() => setIsOpen(false)}
             className="mt-2 px-4 py-3 bg-brand-green text-white font-semibold rounded-xl text-sm text-center hover:bg-brand-green-light transition-all duration-200"
           >
             Get in Touch
-          </a>
+          </Link>
+
         </nav>
       )}
     </header>
