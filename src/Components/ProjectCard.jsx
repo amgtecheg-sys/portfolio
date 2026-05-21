@@ -1,8 +1,10 @@
 import React from "react";
 import { SiGoogledrive } from "react-icons/si";
 import { ArrowUpRight } from "lucide-react";
-import { TAG_STYLES, IMAGES } from "../constants/projects";
 import { motion } from "framer-motion";
+import { TAG_STYLES, IMAGES } from "../constants/projects";
+import SkeletonImage from "./SkeletonImage";
+
 const ProjectCard = ({ project, index }) => {
   const tag = TAG_STYLES[project.tag] ?? { color: "#9ca3af", bg: "rgba(255,255,255,0.05)", border: "rgba(255,255,255,0.1)" };
   const hasLinks = project.googlePlay || project.appStore || project.huaweiAppStore || project.drive;
@@ -17,8 +19,16 @@ const ProjectCard = ({ project, index }) => {
       whileHover={{ y: -4, transition: { duration: 0.25 } }}
     >
       {/* Image */}
-      <div className="relative w-full overflow-hidden">
-        <img src={project.image} alt={project.name} className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy" />
+      <div className="relative w-full overflow-hidden min-h-[220px]">
+        <SkeletonImage
+          src={project.image}
+          alt={project.name}
+          className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.03]"
+          skeletonClassName="min-h-[220px]"
+          loading="lazy"
+        />
+
+        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/50 pointer-events-none" />
 
         {/* Tag badge */}
@@ -37,35 +47,38 @@ const ProjectCard = ({ project, index }) => {
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="text-white font-bold text-[15px] leading-snug mb-1.5 group-hover:text-brand-green transition-colors duration-300">{project.name}</h3>
-        <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">{project.description}</p>
+        <h3 className="text-white font-bold text-[15px] leading-snug mb-1.5 group-hover:text-brand-green transition-colors duration-300">
+          {project.name}
+        </h3>
+        <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
+          {project.description}
+        </p>
 
         {hasLinks && (
           <>
             <div className="w-full h-px bg-white/[0.06] mb-4" />
             <div className="flex flex-wrap items-center gap-2">
               {project.googlePlay && (
-                <a href={project.googlePlay} target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
+                <a href={project.googlePlay} target="_blank" rel="noopener noreferrer"
+                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
                   <img src={IMAGES.googlePlay} alt="Google Play" className="h-8 w-auto" />
                 </a>
               )}
               {project.appStore && (
-                <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
+                <a href={project.appStore} target="_blank" rel="noopener noreferrer"
+                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
                   <img src={IMAGES.appStore} alt="App Store" className="h-8 w-auto" />
                 </a>
               )}
               {project.huaweiAppStore && (
-                <a href={project.huaweiAppStore} target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
+                <a href={project.huaweiAppStore} target="_blank" rel="noopener noreferrer"
+                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
                   <img src={IMAGES.huawei} alt="Huawei AppGallery" className="h-8 w-auto" />
                 </a>
               )}
               {project.drive && (
-                <a
-                  href={project.drive}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 text-gray-400 rounded-lg hover:text-brand-green hover:border-brand-green/30 transition-all duration-200 text-xs font-medium"
-                >
+                <a href={project.drive} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 text-gray-400 rounded-lg hover:text-brand-green hover:border-brand-green/30 transition-all duration-200 text-xs font-medium">
                   <SiGoogledrive size={11} /> Drive
                 </a>
               )}

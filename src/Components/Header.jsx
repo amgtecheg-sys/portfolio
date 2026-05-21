@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { NAV_LINKS } from "../constants/index";
 
@@ -25,11 +26,17 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map(({ href, label }) => (
-            <a key={href} href={href} className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium">
-              {label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.to ? (
+              <Link key={link.to} to={link.to} className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium">
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.href} href={link.href} className="px-4 py-2 text-sm text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium">
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* CTA button desktop */}
@@ -49,16 +56,27 @@ const Navbar = () => {
       {/* Mobile menu */}
       {isOpen && (
         <nav className="md:hidden bg-brand-dark/98 backdrop-blur-xl border-t border-brand-green/10 px-6 py-4 flex flex-col gap-1">
-          {NAV_LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
-            >
-              {label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.to ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-3 text-gray-300 hover:text-brand-green hover:bg-brand-green/5 rounded-lg transition-all duration-200 font-medium text-sm"
+              >
+                {link.label}
+              </a>
+            )
+          )}
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
