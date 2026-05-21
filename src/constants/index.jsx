@@ -2,12 +2,11 @@ import { FaLinkedin, FaWhatsapp, FaTelegram, FaMobileAlt, FaBullhorn, FaPaintBru
 import { Zap, Award, TrendingUp } from "lucide-react";
 
 export const NAV_LINKS = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#team", label: "Team" },
-  { href: "#contact", label: "Contact" },
-  // { to: "/harmonic",   label: "هارمونك" },
+  { href: "/#home", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#team", label: "Team" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export const TECH_STACK = [{ label: "Mobile Apps" }, { label: "Web & Systems" }, { label: "ERP / CRM" }, { label: "Marketing" }, { label: "Automation" }];
