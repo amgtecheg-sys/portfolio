@@ -42,11 +42,18 @@ export const TEAM_MEMBERS = [
     objectPosition: "center top",
     linkedin:       null,
   },
+  {
+    name:           "Ahmed Elmarakby",
+    role:           "Video Editor & Motion Graphics",
+    avatar:         "/team/elmarakby.jpeg",
+    objectPosition: "center top",
+    linkedin:       null,
+  },
 ];
 
 export const CARD_VARIANTS = {
   hidden:  { opacity: 0, y: 50, scale: 0.95 },
-  visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export const CONTAINER_VARIANTS = {
