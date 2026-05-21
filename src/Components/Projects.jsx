@@ -14,6 +14,12 @@ const yalamatch = "/Images/yala-match.png";
 const babaImage = "/Images/BABa.png";
 const babaDash1 = "/Images/Baba_dachboard.png";
 const babaDash2 = "/Images/Baba_dachboard2.png";
+const cashier1 = "/Images/cacheir1 (1).png";
+const cashier2 = "/Images/cacheir1 (2).png";
+const cafe1 = "/Images/cafe1.png";
+const sport1 = "/Images/sport1.png";
+const sport2 = "/Images/sport2.png";
+const sport3 = "/Images/sport3.png";
 
 const tagStyles = {
   Sports: { color: "#3AB54A", bg: "rgba(58,181,74,0.12)", border: "rgba(58,181,74,0.3)" },
@@ -22,6 +28,8 @@ const tagStyles = {
   Service: { color: "#3AB54A", bg: "rgba(58,181,74,0.12)", border: "rgba(58,181,74,0.3)" },
   "E-commerce": { color: "#f9a8d4", bg: "rgba(249,168,212,0.12)", border: "rgba(249,168,212,0.3)" },
   Dashboard: { color: "#c084fc", bg: "rgba(192,132,252,0.12)", border: "rgba(192,132,252,0.3)" },
+  POS: { color: "#fb923c", bg: "rgba(251,146,60,0.12)", border: "rgba(251,146,60,0.3)" },
+  "Café": { color: "#f59e0b", bg: "rgba(245,158,11,0.12)", border: "rgba(245,158,11,0.3)" },
 };
 
 const categories = [
@@ -84,7 +92,32 @@ const categories = [
     label: "Websites",
     icon: Globe,
     color: "#60a5fa",
-    projects: [],
+    projects: [
+      {
+        id: 10,
+        name: "BaBa Dashboard",
+        tag: "Dashboard",
+        description: "Full admin dashboard for the BaBa super app — vendors, orders, delivery agents, and real-time analytics.",
+        images: [babaDash1, babaDash2],
+        type: "wide",
+      },
+      {
+        id: 11,
+        name: "Cafico",
+        tag: "Café",
+        description: "Elegant website for a café brand — showcasing the menu, ambiance, and online presence with a warm modern design.",
+        images: [cafe1, cashier2],
+        type: "wide",
+      },
+      {
+        id: 12,
+        name: "Sport Castle",
+        tag: "Sports",
+        description: "Dynamic sports platform website — covering events, teams, and activities with an energetic and bold visual identity.",
+        images: [sport1, sport2, sport3],
+        type: "wide",
+      },
+    ],
   },
   {
     id: "systems",
@@ -94,21 +127,125 @@ const categories = [
     projects: [
       {
         id: 20,
-        name: "BaBa Dashboard",
-        tag: "Dashboard",
-        description: "Full admin dashboard for the BaBa super app — vendors, orders, delivery agents, and real-time analytics.",
-        image: babaDash1,
-      },
-      {
-        id: 21,
-        name: "BaBa Dashboard II",
-        tag: "Dashboard",
-        description: "Extended admin panel — detailed order management, delivery tracking, and vendor performance reports.",
-        image: babaDash2,
+        name: "Cashier System",
+        tag: "POS",
+        description: "Restaurant point-of-sale system — manage orders, tables, menu items, and daily sales reports with a clean intuitive interface.",
+        images: [cashier1, cashier2],
+        type: "wide",
       },
     ],
   },
 ];
+
+// ─── Wide Project Card (for Systems & Websites) ───────────────────────────────
+const WideProjectCard = ({ project, index }) => {
+  const tag = tagStyles[project.tag] || { color: "#9ca3af", bg: "rgba(255,255,255,0.05)", border: "rgba(255,255,255,0.1)" };
+  const [activeImg, setActiveImg] = useState(0);
+
+  return (
+    <motion.div
+      className="group w-full bg-[#13103a] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/[0.15] hover:shadow-2xl hover:shadow-black/40 transition-all duration-300"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, transition: { duration: 0.25 } }}
+    >
+      <div className="flex flex-col lg:flex-row">
+        {/* Left — image preview */}
+        <div className="relative lg:w-[58%] overflow-hidden bg-black/20">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeImg}
+              src={project.images[activeImg]}
+              alt={`${project.name} screenshot ${activeImg + 1}`}
+              className="w-full h-64 lg:h-full object-cover object-top"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.4 }}
+              loading="lazy"
+            />
+          </AnimatePresence>
+
+          {/* gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#13103a]/60 pointer-events-none hidden lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#13103a]/60 pointer-events-none lg:hidden" />
+
+          {/* Tag */}
+          <div
+            className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider"
+            style={{
+              color: tag.color,
+              background: tag.bg,
+              border: `1px solid ${tag.border}`,
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            {project.tag}
+          </div>
+
+          {/* Thumbnail switcher */}
+          {project.images.length > 1 && (
+            <div className="absolute bottom-3 left-3 flex gap-2">
+              {project.images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className="relative w-12 h-8 rounded-md overflow-hidden border-2 transition-all duration-200"
+                  style={{
+                    borderColor: activeImg === i ? tag.color : "rgba(255,255,255,0.2)",
+                    opacity: activeImg === i ? 1 : 0.55,
+                  }}
+                >
+                  <img src={img} alt={`thumb ${i + 1}`} className="w-full h-full object-cover object-top" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Right — content */}
+        <div className="flex flex-col justify-center p-6 lg:p-8 lg:w-[42%]">
+          <div
+            className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider mb-4 self-start"
+            style={{ color: tag.color, background: tag.bg, border: `1px solid ${tag.border}` }}
+          >
+            <Monitor size={10} />
+            {project.tag}
+          </div>
+
+          <h3 className="text-white font-black text-xl lg:text-2xl leading-tight mb-3 group-hover:text-[#a78bfa] transition-colors duration-300">
+            {project.name}
+          </h3>
+
+          <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            {project.description}
+          </p>
+
+          {/* Image counter dots */}
+          {project.images.length > 1 && (
+            <div className="flex gap-2 items-center">
+              {project.images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: activeImg === i ? "20px" : "6px",
+                    height: "6px",
+                    background: activeImg === i ? tag.color : "rgba(255,255,255,0.2)",
+                  }}
+                />
+              ))}
+              <span className="text-gray-600 text-xs ml-1">{activeImg + 1} / {project.images.length}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 // ─── Project Card ─────────────────────────────────────────────────────────────
 const ProjectCard = ({ project, index }) => {
@@ -300,11 +437,23 @@ const Projects = () => {
             transition={{ duration: 0.3 }}
           >
             {active.projects.length > 0 ? (
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
-                {active.projects.map((project, i) => (
-                  <ProjectCard key={project.id} project={project} index={i} />
-                ))}
-              </div>
+              active.projects.some((p) => p.type === "wide") ? (
+                <div className="flex flex-col gap-6">
+                  {active.projects.map((project, i) =>
+                    project.type === "wide" ? (
+                      <WideProjectCard key={project.id} project={project} index={i} />
+                    ) : (
+                      <ProjectCard key={project.id} project={project} index={i} />
+                    )
+                  )}
+                </div>
+              ) : (
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+                  {active.projects.map((project, i) => (
+                    <ProjectCard key={project.id} project={project} index={i} />
+                  ))}
+                </div>
+              )
             ) : (
               <EmptyState label={active.label} color={active.color} />
             )}

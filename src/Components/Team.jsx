@@ -42,6 +42,12 @@ const teamMembers = [
         avatar: "/team/ghonemy.jpeg",
         linkedin: null,
     },
+        {
+        name: "Ahmed Elmarakby",
+        role: "Video Editor & Motion Graphics",
+        avatar: "/team/elmarakby.jpeg",
+        linkedin: null,
+    },
 ];
 
 const containerVariants = {
