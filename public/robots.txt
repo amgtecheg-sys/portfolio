@@ -1,0 +1,6 @@
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Tell crawlers where the sitemap is
+Sitemap: https://amgtech.tech/sitemap.xml
