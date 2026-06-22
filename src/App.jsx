@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home/Home";
 import Harmonic from "./pages/Harmonic/Harmonic";
+import ErpSuperSystem from "./pages/ErpSuperSystem/ErpSuperSystem";
 import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "harmonic",
         Component: Harmonic,
+      },
+      {
+        path: "erp-super-system",
+        Component: ErpSuperSystem,
       },
     ],
   },
