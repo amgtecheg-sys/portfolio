@@ -3,6 +3,7 @@ import Layout from "./layouts/Layout";
 import Home from "./pages/Home/Home";
 import Harmonic from "./pages/Harmonic/Harmonic";
 import ErpSuperSystem from "./pages/ErpSuperSystem/ErpSuperSystem";
+import SmartCompound from "./pages/SmartCompound/SmartCompound";
 import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "erp-super-system",
         Component: ErpSuperSystem,
+      },
+      {
+        path: "smart-compound",
+        Component: SmartCompound,
       },
     ],
   },
