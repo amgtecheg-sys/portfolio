@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { SiGoogledrive } from "react-icons/si";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { TAG_STYLES, IMAGES } from "../constants/projects";
 import SkeletonImage from "./SkeletonImage";
 
 const ProjectCard = ({ project, index }) => {
+  const [activeImg, setActiveImg] = useState(0);
   const tag = TAG_STYLES[project.tag] ?? { color: "#9ca3af", bg: "rgba(255,255,255,0.05)", border: "rgba(255,255,255,0.1)" };
   const hasLinks = project.googlePlay || project.appStore || project.huaweiAppStore || project.drive;
+  const gallery = project.images?.length ? project.images : [project.image];
 
   return (
     <motion.div
@@ -20,13 +22,23 @@ const ProjectCard = ({ project, index }) => {
     >
       {/* Image */}
       <div className="relative w-full overflow-hidden min-h-[220px]">
-        <SkeletonImage
-          src={project.image}
-          alt={project.name}
-          className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.03]"
-          skeletonClassName="min-h-[220px]"
-          loading="lazy"
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeImg}
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+          >
+            <SkeletonImage
+              src={gallery[activeImg]}
+              alt={gallery.length > 1 ? `${project.name} screenshot ${activeImg + 1}` : project.name}
+              className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.03]"
+              skeletonClassName="min-h-[220px]"
+              loading="lazy"
+            />
+          </motion.div>
+        </AnimatePresence>
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/50 pointer-events-none" />
@@ -43,6 +55,25 @@ const ProjectCard = ({ project, index }) => {
         <div className="absolute top-3 right-3 w-7 h-7 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
           <ArrowUpRight size={13} className="text-white" />
         </div>
+
+        {/* Thumbnail switcher */}
+        {gallery.length > 1 && (
+          <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
+            {gallery.map((img, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveImg(i)}
+                className="relative w-9 h-9 rounded-md overflow-hidden border-2 transition-all duration-200"
+                style={{
+                  borderColor: activeImg === i ? tag.color : "rgba(255,255,255,0.2)",
+                  opacity:     activeImg === i ? 1 : 0.55,
+                }}
+              >
+                <img src={img} alt={`thumb ${i + 1}`} className="w-full h-full object-cover object-top" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Content */}
