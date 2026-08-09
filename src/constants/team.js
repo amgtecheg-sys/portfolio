@@ -36,9 +36,9 @@ export const TEAM_MEMBERS = [
     linkedin: "https://www.linkedin.com/in/ahmed-elnabawy-459597218/",
   },
   {
-    name: "Ahmed Elnghonemy",
-    role: "Senior Graphic Designer",
-    avatar: "/team/ghonemy.jpeg",
+    name: "Omar Mohey",
+    role: "Graphic Designer",
+    avatar: "/team/omar.jpeg",
     objectPosition: "center top",
     linkedin: null,
   },

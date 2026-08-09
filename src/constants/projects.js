@@ -23,6 +23,11 @@ export const IMAGES = {
   sport1:      "/Images/sport1.png",
   sport2:      "/Images/sport2.png",
   sport3:      "/Images/sport3.png",
+  aurevia:     "/Images/aur.png",
+  aurevia1:    "/Images/aur1.png",
+  aurevia2:    "/Images/aur2.png",
+  aurevia3:    "/Images/aur3.png",
+  aurevia4:    "/Images/aur4.png",
 };
 
 // Hex used in JS string concatenation (e.g. `${color}15`).
@@ -38,6 +43,7 @@ export const TAG_STYLES = {
   Dashboard:     { color: "#c084fc",  bg: "rgba(192,132,252,0.12)", border: "rgba(192,132,252,0.3)" },
   POS:           { color: "#fb923c",  bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)" },
   "Café":        { color: "#f59e0b",  bg: "rgba(245,158,11,0.12)",  border: "rgba(245,158,11,0.3)" },
+  Brand:         { color: "#e8d5b7",  bg: "rgba(232,213,183,0.12)", border: "rgba(232,213,183,0.3)" },
 };
 
 export const CATEGORIES = [
@@ -132,6 +138,15 @@ export const CATEGORIES = [
         tag: "Sports",
         description: "Dynamic sports platform website — covering events, teams, and activities with an energetic and bold visual identity.",
         images: [IMAGES.sport1, IMAGES.sport2, IMAGES.sport3],
+        wide: true,
+      },
+      {
+        id: 13,
+        name: "AUREVIA",
+        tag: "Brand",
+        description: "Premium brand website with a refined visual identity — showcasing the collection, story, and online presence.",
+        images: [IMAGES.aurevia, IMAGES.aurevia1, IMAGES.aurevia2, IMAGES.aurevia3, IMAGES.aurevia4],
+        website: "https://aurevia-brand.com/",
         wide: true,
       },
     ],

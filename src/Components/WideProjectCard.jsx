@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { TAG_STYLES } from "../constants/projects";
 import SkeletonImage from "./SkeletonImage";
 
@@ -96,7 +97,7 @@ const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
 
           {/* Image counter dots */}
           {project.images.length > 1 && (
-            <div className="flex gap-2 items-center">
+            <div className={`flex gap-2 items-center${project.website ? " mb-6" : ""}`}>
               {project.images.map((_, i) => (
                 <button
                   key={i}
@@ -111,6 +112,19 @@ const WideProjectCard = ({ project, index, categoryColor, CategoryIcon }) => {
               ))}
               <span className="text-gray-600 text-xs ml-1">{activeImg + 1} / {project.images.length}</span>
             </div>
+          )}
+
+          {project.website && (
+            <a
+              href={project.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 self-start text-xs font-semibold px-3.5 py-2 rounded-lg border transition-all duration-200 hover:scale-[1.02]"
+              style={{ color: tag.color, background: tag.bg, borderColor: tag.border }}
+            >
+              Visit Website
+              <ArrowUpRight size={13} />
+            </a>
           )}
         </div>
 
