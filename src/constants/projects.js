@@ -28,6 +28,13 @@ export const IMAGES = {
   aurevia2:    "/Images/aur2.png",
   aurevia3:    "/Images/aur3.png",
   aurevia4:    "/Images/aur4.png",
+  fmtu1:       "/Images/fmtu (1).png",
+  fmtu2:       "/Images/fmtu (2).png",
+  fmtu3:       "/Images/fmtu (3).png",
+  wahaj1:      "/Images/wahaj (1).png",
+  wahaj2:      "/Images/wahaj (2).png",
+  wahaj3:      "/Images/wahaj (3).png",
+  wahaj4:      "/Images/wahaj (4).png",
 };
 
 // Hex used in JS string concatenation (e.g. `${color}15`).
@@ -44,6 +51,8 @@ export const TAG_STYLES = {
   POS:           { color: "#fb923c",  bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)" },
   "Café":        { color: "#f59e0b",  bg: "rgba(245,158,11,0.12)",  border: "rgba(245,158,11,0.3)" },
   Brand:         { color: "#e8d5b7",  bg: "rgba(232,213,183,0.12)", border: "rgba(232,213,183,0.3)" },
+  Conference:    { color: "#38bdf8",  bg: "rgba(56,189,248,0.12)",  border: "rgba(56,189,248,0.3)" },
+  Marketing:     { color: "#f472b6",  bg: "rgba(244,114,182,0.12)", border: "rgba(244,114,182,0.3)" },
 };
 
 export const CATEGORIES = [
@@ -117,6 +126,33 @@ export const CATEGORIES = [
     color: "#60a5fa",
     projects: [
       {
+        id: 13,
+        name: "AUREVIA",
+        tag: "Brand",
+        description: "Premium brand website with a refined visual identity — showcasing the collection, story, and online presence.",
+        images: [IMAGES.aurevia, IMAGES.aurevia1, IMAGES.aurevia2, IMAGES.aurevia3, IMAGES.aurevia4],
+        website: "https://aurevia-brand.com/",
+        wide: true,
+      },
+      {
+        id: 14,
+        name: "FMTU Conference",
+        tag: "Conference",
+        description: "Official conferences website for the Faculty of Medicine, Tanta University — event listings, schedules, and registration.",
+        images: [IMAGES.fmtu1, IMAGES.fmtu2, IMAGES.fmtu3],
+        website: "https://www.fmtuconference.com/",
+        wide: true,
+      },
+      {
+        id: 15,
+        name: "Wahaj Media",
+        tag: "Marketing",
+        description: "Creative marketing agency portfolio — showcasing campaigns, media work, and brand storytelling with a bold visual presence.",
+        images: [IMAGES.wahaj1, IMAGES.wahaj2, IMAGES.wahaj3, IMAGES.wahaj4],
+        website: "https://wahaj.marketing/",
+        wide: true,
+      },
+      {
         id: 10,
         name: "BaBa Dashboard",
         tag: "Dashboard",
@@ -138,15 +174,6 @@ export const CATEGORIES = [
         tag: "Sports",
         description: "Dynamic sports platform website — covering events, teams, and activities with an energetic and bold visual identity.",
         images: [IMAGES.sport1, IMAGES.sport2, IMAGES.sport3],
-        wide: true,
-      },
-      {
-        id: 13,
-        name: "AUREVIA",
-        tag: "Brand",
-        description: "Premium brand website with a refined visual identity — showcasing the collection, story, and online presence.",
-        images: [IMAGES.aurevia, IMAGES.aurevia1, IMAGES.aurevia2, IMAGES.aurevia3, IMAGES.aurevia4],
-        website: "https://aurevia-brand.com/",
         wide: true,
       },
     ],
