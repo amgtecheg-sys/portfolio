@@ -2,20 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 
-const SCROLL_SPEED = 42; // px per second
+const SCROLL_SPEED = 42;
 const HOLD_TOP_MS = 900;
 const HOLD_BOTTOM_MS = 1300;
+const MAX_VIEWPORT = 520;
 
 const WebsiteCard = ({ project, index }) => {
   const images = project.images ?? [];
   const [activeImg, setActiveImg] = useState(0);
   const [paused, setPaused] = useState(false);
   const [imgReady, setImgReady] = useState(false);
+  const [viewportH, setViewportH] = useState(0);
 
   const viewportRef = useRef(null);
   const imgRef = useRef(null);
   const offsetRef = useRef(0);
-  const phaseRef = useRef("hold-top"); // hold-top | scrolling | hold-bottom
+  const phaseRef = useRef("hold-top");
   const phaseSinceRef = useRef(0);
   const rafRef = useRef(0);
   const lastTsRef = useRef(0);
@@ -24,7 +26,12 @@ const WebsiteCard = ({ project, index }) => {
     ? project.website.replace(/^https?:\/\//, "").replace(/\/$/, "")
     : null;
 
-  const markReady = () => setImgReady(true);
+  const syncViewport = (img) => {
+    if (!img || !img.naturalHeight) return;
+    const renderedH = img.offsetHeight || (img.naturalHeight * (img.clientWidth / img.naturalWidth));
+    setViewportH(Math.min(renderedH, MAX_VIEWPORT));
+    setImgReady(true);
+  };
 
   useEffect(() => {
     offsetRef.current = 0;
@@ -32,16 +39,27 @@ const WebsiteCard = ({ project, index }) => {
     phaseSinceRef.current = performance.now();
     lastTsRef.current = 0;
     setImgReady(false);
-    if (imgRef.current) {
-      imgRef.current.style.transform = "translate3d(0, 0, 0)";
-      if (imgRef.current.complete && imgRef.current.naturalHeight > 0) {
-        setImgReady(true);
+
+    const img = imgRef.current;
+    if (img) {
+      img.style.transform = "translate3d(0, 0, 0)";
+      if (img.complete && img.naturalHeight > 0) {
+        // Wait a frame so layout width is correct
+        requestAnimationFrame(() => syncViewport(img));
       }
     }
   }, [activeImg]);
 
   useEffect(() => {
-    if (images.length === 0 || !imgReady) return;
+    const onResize = () => {
+      if (imgRef.current?.complete) syncViewport(imgRef.current);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [activeImg]);
+
+  useEffect(() => {
+    if (images.length === 0 || !imgReady || !viewportH) return;
 
     const advance = () => {
       if (images.length > 1) {
@@ -71,14 +89,12 @@ const WebsiteCard = ({ project, index }) => {
       const dt = Math.min((ts - lastTsRef.current) / 1000, 0.05);
       lastTsRef.current = ts;
 
-      const viewport = viewportRef.current;
       const img = imgRef.current;
-      if (!viewport || !img) return;
+      if (!img) return;
 
-      const maxScroll = Math.max(0, img.offsetHeight - viewport.clientHeight);
+      const maxScroll = Math.max(0, img.offsetHeight - viewportH);
       const elapsed = ts - phaseSinceRef.current;
 
-      // Image fits in viewport — just hold then advance
       if (maxScroll <= 4) {
         if (elapsed >= 2400) advance();
         return;
@@ -97,7 +113,6 @@ const WebsiteCard = ({ project, index }) => {
         return;
       }
 
-      // scrolling
       const next = Math.min(maxScroll, offsetRef.current + SCROLL_SPEED * dt);
       offsetRef.current = next;
       img.style.transform = `translate3d(0, ${-next}px, 0)`;
@@ -110,11 +125,15 @@ const WebsiteCard = ({ project, index }) => {
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [activeImg, imgReady, paused, images.length]);
+  }, [activeImg, imgReady, paused, images.length, viewportH]);
+
+  const needsScroll = imgRef.current
+    ? imgRef.current.offsetHeight > viewportH + 4
+    : viewportH >= MAX_VIEWPORT - 1;
 
   return (
     <motion.div
-      className="group"
+      className="group h-fit"
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.08 }}
@@ -152,7 +171,8 @@ const WebsiteCard = ({ project, index }) => {
 
         <div
           ref={viewportRef}
-          className="relative h-[360px] sm:h-[440px] overflow-hidden bg-black/40"
+          className="relative overflow-hidden bg-transparent transition-[height] duration-500 ease-out"
+          style={{ height: viewportH || "auto", minHeight: viewportH ? undefined : 120 }}
         >
           {images.map((src, i) => (
             <img
@@ -163,15 +183,19 @@ const WebsiteCard = ({ project, index }) => {
               className={`absolute top-0 left-0 w-full h-auto will-change-transform transition-opacity duration-500 ${
                 i === activeImg ? "opacity-100" : "opacity-0 pointer-events-none"
               }`}
-              onLoad={() => {
-                if (i === activeImg) markReady();
+              onLoad={(e) => {
+                if (i === activeImg) syncViewport(e.currentTarget);
               }}
               draggable={false}
             />
           ))}
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#0c0a24]/50 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0c0a24]/80 to-transparent z-10" />
+          {needsScroll && (
+            <>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-[#0c0a24]/40 to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#0c0a24]/70 to-transparent z-10" />
+            </>
+          )}
 
           {images.length > 1 && (
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">

@@ -86,7 +86,7 @@ const Projects = () => {
           <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
             {active.projects.length > 0 ? (
               isWebLayout ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
                   {active.projects.map((project, i) => (
                     <WebsiteCard key={project.id} project={project} index={i} />
                   ))}
