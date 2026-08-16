@@ -29,6 +29,20 @@ export const TEAM_MEMBERS = [
     linkedin: "https://www.linkedin.com/in/rawannada/",
   },
   {
+    name: "Rewan Elsonbaty",
+    role: "Mobile Developer & Sales",
+    avatar: "/team/rewan-elsonaty.jpg",
+    objectPosition: "center top",
+    linkedin: "https://www.linkedin.com/in/rewan-elsonbaty-489032263",
+  },
+  {
+    name: "Marena Emad",
+    role: "Sales & Marketing",
+    avatar: "/team/marena.jpg",
+    objectPosition: "center top",
+    linkedin: "https://www.linkedin.com/in/marena-emad-b9a542272",
+  },
+  {
     name: "Ahmed Elnabawy",
     role: "Data Entry & Data Analysis",
     avatar: "/team/elnabawy.jpeg",
@@ -40,7 +54,7 @@ export const TEAM_MEMBERS = [
     role: "Graphic Designer",
     avatar: "/team/omar.jpeg",
     objectPosition: "center top",
-    linkedin: null,
+    linkedin: "https://www.linkedin.com/in/omar-mohey-866b6b322/",
   },
   {
     name: "Ahmed Elmarakby",
