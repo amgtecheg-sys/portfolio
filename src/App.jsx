@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Harmonic from "./pages/Harmonic/Harmonic";
 import ErpSuperSystem from "./pages/ErpSuperSystem/ErpSuperSystem";
 import SmartCompound from "./pages/SmartCompound/SmartCompound";
+import TechnicalProposal from "./pages/TechnicalProposal/TechnicalProposal";
 import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
         Component: SmartCompound,
       },
     ],
+  },
+  {
+    path: "/technical-proposal",
+    Component: TechnicalProposal,
+    errorElement: <ErrorPage />,
   },
 ]);
 
