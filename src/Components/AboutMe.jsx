@@ -4,7 +4,7 @@ import { Zap, Code, Award, TrendingUp } from "lucide-react";
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import Projects from "./Projects";
-import Team from "./Team";
+// import Team from "./Team"; // TODO: temporarily commented out
 import { stats, services, fadeUp } from "../constants";
 /* eslint-enable no-unused-vars */
 
@@ -98,8 +98,8 @@ const AboutMe = () => (
     {/* Projects */}
     <Projects />
 
-    {/* Team */}
-    <Team />
+    {/* Team - temporarily commented out */}
+    {/* <Team /> */}
   </div>
 );
 
