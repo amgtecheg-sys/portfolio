@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { SiGoogledrive } from "react-icons/si";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TAG_STYLES, IMAGES } from "../constants/projects";
+import { IMAGES } from "../constants/projects";
 import SkeletonImage from "./SkeletonImage";
 
 const ProjectCard = ({ project, index }) => {
   const [activeImg, setActiveImg] = useState(0);
-  const tag = TAG_STYLES[project.tag] ?? { color: "#9ca3af", bg: "rgba(255,255,255,0.05)", border: "rgba(255,255,255,0.1)" };
   const hasLinks = project.googlePlay || project.appStore || project.huaweiAppStore || project.drive;
   const gallery = project.images?.length ? project.images : [project.image];
 
   return (
     <motion.div
-      className="group bg-brand-card-dark border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/[0.15] hover:shadow-2xl hover:shadow-black/40 transition-all duration-300 break-inside-avoid mb-5"
+      className="group bg-brand-card-dark border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/[0.15] hover:shadow-2xl hover:shadow-black/40 transition-all duration-300 flex flex-col justify-between h-full"
       initial={{ opacity: 0, y: 40, scale: 0.97 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -43,14 +42,6 @@ const ProjectCard = ({ project, index }) => {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/50 pointer-events-none" />
 
-        {/* Tag badge */}
-        <div
-          className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider"
-          style={{ color: tag.color, background: tag.bg, border: `1px solid ${tag.border}`, backdropFilter: "blur(8px)" }}
-        >
-          {project.tag}
-        </div>
-
         {/* Hover arrow */}
         <div className="absolute top-3 right-3 w-7 h-7 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
           <ArrowUpRight size={13} className="text-white" />
@@ -65,7 +56,7 @@ const ProjectCard = ({ project, index }) => {
                 onClick={() => setActiveImg(i)}
                 className="relative w-9 h-9 rounded-md overflow-hidden border-2 transition-all duration-200"
                 style={{
-                  borderColor: activeImg === i ? tag.color : "rgba(255,255,255,0.2)",
+                  borderColor: activeImg === i ? "#3AB54A" : "rgba(255,255,255,0.2)",
                   opacity:     activeImg === i ? 1 : 0.55,
                 }}
               >
@@ -77,27 +68,41 @@ const ProjectCard = ({ project, index }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="text-white font-bold text-[15px] leading-snug mb-1.5 group-hover:text-brand-green transition-colors duration-300">
-          {project.name}
-        </h3>
-        <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
-          {project.description}
-        </p>
+      <div className="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="text-white font-bold text-[15px] leading-snug mb-1.5 group-hover:text-brand-green transition-colors duration-300">
+            {project.name}
+          </h3>
+          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
+            {project.description}
+          </p>
+        </div>
 
         {hasLinks && (
-          <>
+          <div>
             <div className="w-full h-px bg-white/[0.06] mb-4" />
             <div className="flex flex-wrap items-center gap-2">
               {project.googlePlay && (
-                <a href={project.googlePlay} target="_blank" rel="noopener noreferrer"
-                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
+                <a
+                  href={project.googlePlay !== "#" ? project.googlePlay : undefined}
+                  target={project.googlePlay !== "#" ? "_blank" : undefined}
+                  rel={project.googlePlay !== "#" ? "noopener noreferrer" : undefined}
+                  onClick={project.googlePlay === "#" ? (e) => e.preventDefault() : undefined}
+                  title={project.googlePlay === "#" ? "Coming Soon" : "Google Play"}
+                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200 cursor-pointer"
+                >
                   <img src={IMAGES.googlePlay} alt="Google Play" className="h-8 w-auto" />
                 </a>
               )}
               {project.appStore && (
-                <a href={project.appStore} target="_blank" rel="noopener noreferrer"
-                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200">
+                <a
+                  href={project.appStore !== "#" ? project.appStore : undefined}
+                  target={project.appStore !== "#" ? "_blank" : undefined}
+                  rel={project.appStore !== "#" ? "noopener noreferrer" : undefined}
+                  onClick={project.appStore === "#" ? (e) => e.preventDefault() : undefined}
+                  title={project.appStore === "#" ? "Coming Soon" : "App Store"}
+                  className="opacity-70 hover:opacity-100 transition-opacity hover:scale-105 transform duration-200 cursor-pointer"
+                >
                   <img src={IMAGES.appStore} alt="App Store" className="h-8 w-auto" />
                 </a>
               )}
@@ -114,7 +119,7 @@ const ProjectCard = ({ project, index }) => {
                 </a>
               )}
             </div>
-          </>
+          </div>
         )}
       </div>
     </motion.div>
