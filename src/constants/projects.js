@@ -73,8 +73,8 @@ export const CATEGORIES = [
         name: "KUBA Tours",
         description: "Tourism and travel booking app — explore curated travel packages, book trips and hotel stays, and discover memorable tour experiences.",
         image:          IMAGES.kubaTours,
-        googlePlay:     "#",
-        appStore:       "#",
+        googlePlay:     "https://play.google.com/store/apps/details?id=com.kuba.app",
+        appStore:       "https://apps.apple.com/us/app/kuba-tours/id6836252299",
       },
       {
         id: 7,
@@ -100,6 +100,7 @@ export const CATEGORIES = [
         image:  IMAGES.syntaxMain,
         images: [IMAGES.syntaxMain, IMAGES.syntax1, IMAGES.syntax2, IMAGES.syntax4, IMAGES.syntax5, IMAGES.syntax6],
         googlePlay: "https://play.google.com/store/apps/details?id=com.syntax.academy",
+        appStore:   "https://apps.apple.com/us/app/syntax-academy/id6836142546",
       },
       {
         id: 2,
